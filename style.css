@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  flex: 1 1 auto;
+  text-align: center;
+  align-items: center;
+  padding-inline-start: 20px;
+  padding-inline-end: 28px;
+  justify-content: space-evenly;
+  font-size: 15px;
+  margin-top: 15px;
+  padding: auto;
+}
+
+.navbar p {
+  margin: auto;
+  padding: 8px;
+  color: #000;
+  opacity: 0.75;
+}
+
+.options img {
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  padding: 10px 30px 10px 20px;
+}
+
+.sign-in button {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 1px solid #4285f4;
+  border-radius: 2px;
+  font-weight: bold;
+  background: -webkit-linear-gradient(top, #4387fd, #4683ea);
+  outline: none;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.central {
+  margin: 100px auto;
+  width: 50%;
+  align-items: center;
+}
