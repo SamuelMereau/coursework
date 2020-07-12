@@ -72,9 +72,10 @@ p {
   width: 100%;
   flex-grow: 1;
   height: 35px;
+  border: 1px solid grey;
+  opacity: 0.75;
   border-radius: 20px;
   border-width: 1px;
-  border-color: grey;
   margin-bottom: 30px;
   background-image: url("img/search.png");
   background-repeat: no-repeat;
