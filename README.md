@@ -1,7 +1,3 @@
-# The Odin Project Coursework
+# Rock Paper Scissors
 
-This is a portfolio of all my completed coursework projects given by The Odin Project.
-
-Completed stuff will appear in their own branch chronologically as I (eventually) get through it all
-
-> Feel free to fork any of my code in this repository
+Full Stack Rock Paper Scissors game
