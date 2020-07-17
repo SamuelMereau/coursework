@@ -1,4 +1,4 @@
-/* Written by Samcool236, 2020 */
+/* Written by Samuel Mereau, 2020 */
 
 //Global Variables
 let output;
