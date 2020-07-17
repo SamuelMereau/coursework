@@ -1,5 +1,31 @@
+/* Written by Samcool236, 2020 */
+
+//Global Variables
 let output;
 
+let winCounter = 0;
+let loseCounter = 0;
+
+console.log(
+  "\n      %cEnter game() to begin!\n\t\t".trim(),
+  "\n      color: white;\n      background-color: black;\n      font-size: 1.4rem;\n      padding: 20px;\n"
+);
+
+//winCount should be returned for every round resulting in a win for the player
+let winCount = () => {
+  winCounter++;
+  console.log(`You Won! You've won ${winCounter} game/s so far`);
+};
+//loseCount should be returned for every round resulting in a loss for the player
+let loseCount = () => {
+  loseCounter++;
+  console.log(`You Lost! You've lost ${loseCounter} game/s so far`);
+};
+//draw should be returned for every round resulting in equal action played
+let draw = () => {
+  console.log("Draw! No points gained or losed");
+};
+//computerPlay will create a random selection from all plays each time it is called
 let computerPlay = () => {
   let random = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
   switch (random) {
@@ -14,16 +40,11 @@ let computerPlay = () => {
       break;
   }
 };
-
+//playRound is nested within game(), and is looped 5 times to complete the entire game. UX friendly
 function playRound(playerSelection, computerSelection) {
   computerPlay();
-
-  playerSelection = prompt("Rock, paper or scissors?");
-  if (playerSelection === null) {
-    return;
-  }
   computerSelection = output;
-
+  playerSelection = prompt("Rock, paper or scissors?");
   console.log(
     `You played ${playerSelection.toUpperCase()}, the computer played ${output}.`
   );
@@ -34,7 +55,7 @@ function playRound(playerSelection, computerSelection) {
       computerSelection == "SCISSORS") ||
     (playerSelection.toUpperCase() == "SCISSORS" && computerSelection == "ROCK")
   ) {
-    console.log("You Won!");
+    return loseCount();
   } else if (
     (playerSelection.toUpperCase() == "ROCK" &&
       computerSelection == "SCISSORS") ||
@@ -42,16 +63,31 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection.toUpperCase() == "SCISSORS" &&
       computerSelection == "PAPER")
   ) {
-    console.log("You won!");
+    return winCount();
   } else if (playerSelection.toUpperCase() == computerSelection) {
-    console.log("Draw!");
+    return draw();
   } else {
-    console.log("It doesn't look like your play was valid. Try again");
+    return "It doesn't look like your play was valid. Try again";
   }
 }
-
+//Main function. UX friendly
 function game() {
-  for (count = 0; count < 5; count++) {
+  for (playCount = 0; playCount < 5; playCount++) {
     playRound();
+    //Stop the game if the player presses Cancel
+    if (playerSelection === null) {
+      break;
+    }
+    //Stop the game once 5 rounds are played
+    if (playCount == 5) {
+      break;
+    }
+  }
+  if (winCounter > loseCounter) {
+    return `You Won! Final score was: ${winCounter} | ${loseCounter}`;
+  } else if (loseCounter > winCounter) {
+    return `You Lost! Final score was: ${winCounter} | ${loseCounter}`;
+  } else {
+    return `Draw Game!`;
   }
 }
