@@ -1,31 +1,45 @@
 /* Written by Samuel Mereau, 2020 */
 
-//Global Variables
 let output;
+
+let playerSelection;
+let computerSelection;
 
 let winCounter = 0;
 let loseCounter = 0;
+let gameCount = 0;
 
-console.log(
-  "\n      %cEnter game() to begin!\n\t\t".trim(),
-  "\n      color: white;\n      background-color: black;\n      font-size: 1.4rem;\n      padding: 20px;\n"
-);
+let hasPlayed;
+let finishedPlay;
 
 //winCount should be returned for every round resulting in a win for the player
-let winCount = () => {
+function winCount() {
   winCounter++;
-  console.log(`You Won! You've won ${winCounter} game/s so far`);
-};
+  gameCount++;
+  const result = document.querySelector("#results");
+  const addResult = document.createElement("p");
+  addResult.textContent = `You Win! You've won ${winCounter} game/s so far. ${gameCount} game/s have been played so far.`;
+  result.appendChild(addResult);
+}
 //loseCount should be returned for every round resulting in a loss for the player
-let loseCount = () => {
+function loseCount() {
   loseCounter++;
-  console.log(`You Lost! You've lost ${loseCounter} game/s so far`);
-};
+  gameCount++;
+  const result = document.querySelector("#results");
+  const addResult = document.createElement("p");
+  addResult.textContent = `You Lose! You've lost ${loseCounter} game/s so far. ${gameCount} game/s have been played so far.`;
+  result.appendChild(addResult);
+}
 //draw should be returned for every round resulting in equal action played
-let draw = () => {
-  console.log("Draw! No points gained or losed");
-};
-//computerPlay will create a random selection from all plays each time it is called
+function draw() {
+  gameCount++;
+  const result = document.querySelector("#results");
+  const addResult = document.createElement("p");
+  addResult.textContent = `Draw! No points were gained or lost. ${gameCount} game/s have been played so far.`;
+  result.appendChild(addResult);
+}
+
+//computerPlay will create a random selection for all plays each time it is called
 let computerPlay = () => {
   let random = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
   switch (random) {
@@ -40,54 +54,166 @@ let computerPlay = () => {
       break;
   }
 };
-//playRound is nested within game(), and is looped 5 times to complete the entire game. UX friendly
-function playRound(playerSelection, computerSelection) {
+
+//playRound is nested within game(), and is looped 5 times to complete the entire game
+function playRound() {
   computerPlay();
   computerSelection = output;
-  playerSelection = prompt("Rock, paper or scissors?");
-  console.log(
-    `You played ${playerSelection.toUpperCase()}, the computer played ${output}.`
-  );
 
-  if (
-    (playerSelection.toUpperCase() == "ROCK" && computerSelection == "PAPER") ||
-    (playerSelection.toUpperCase() == "PAPER" &&
-      computerSelection == "SCISSORS") ||
-    (playerSelection.toUpperCase() == "SCISSORS" && computerSelection == "ROCK")
-  ) {
-    return loseCount();
-  } else if (
-    (playerSelection.toUpperCase() == "ROCK" &&
-      computerSelection == "SCISSORS") ||
-    (playerSelection.toUpperCase() == "PAPER" && computerSelection == "ROCK") ||
-    (playerSelection.toUpperCase() == "SCISSORS" &&
-      computerSelection == "PAPER")
-  ) {
-    return winCount();
-  } else if (playerSelection.toUpperCase() == computerSelection) {
-    return draw();
+  if (hasPlayed === true) {
+    if (
+      (playerSelection.toUpperCase() == "ROCK" &&
+        computerSelection == "PAPER") ||
+      (playerSelection.toUpperCase() == "PAPER" &&
+        computerSelection == "SCISSORS") ||
+      (playerSelection.toUpperCase() == "SCISSORS" &&
+        computerSelection == "ROCK")
+    ) {
+      return loseCount();
+    } else if (
+      (playerSelection.toUpperCase() == "ROCK" &&
+        computerSelection == "SCISSORS") ||
+      (playerSelection.toUpperCase() == "PAPER" &&
+        computerSelection == "ROCK") ||
+      (playerSelection.toUpperCase() == "SCISSORS" &&
+        computerSelection == "PAPER")
+    ) {
+      return winCount();
+    } else if (playerSelection.toUpperCase() == computerSelection) {
+      return draw();
+    } else {
+      return "It doesn't look like your play was valid. Try again";
+    }
   } else {
-    return "It doesn't look like your play was valid. Try again";
+    return;
   }
 }
-//Main function. UX friendly
-function game() {
-  for (playCount = 0; playCount < 5; playCount++) {
+
+function finishRoundLogic() {
+  const result = document.querySelector("#results");
+  const notice = document.querySelector("#notice");
+  //Remove the first notice sent as a reult of pressing the Start Game button
+  if (notice !== null) {
+    notice.remove();
+  }
+  //Stop the game once the gameCount reaches 5
+  if (gameCount == 5 && winCounter > loseCounter) {
+    const finishGame = document.createElement("p");
+    finishGame.textContent = `Game finished! You won the game with a total of ${winCounter} win/s and ${loseCounter} losses. Please refresh the page to start a new game.`;
+    result.appendChild(finishGame);
+    finishedPlay = true;
+    return resetGame();
+  } else if (gameCount == 5 && loseCounter > winCounter) {
+    const finishGame = document.createElement("p");
+    finishGame.textContent = `Game finished! You lost the game with a total of ${loseCounter} losses and ${winCounter} win/s. Please refresh the page to start a new game.`;
+    result.appendChild(finishGame);
+    finishedPlay = true;
+    return resetGame();
+  } else if (gameCount == 5 && loseCounter == winCounter) {
+    const finishGame = document.createElement("p");
+    finishGame.textContent = `Game finished with a draw! Please refresh the page to start a new game.`;
+    result.appendChild(finishGame);
+    finishedPlay = true;
+    return resetGame();
+  }
+}
+
+function awaitPlay() {
+  //Listen for an event response from buttons
+  const rockButton = document.querySelector("#rock");
+  rockButton.addEventListener("click", function rockEvent(e) {
+    if (finishedPlay === true) {
+      return;
+    }
+    finishRoundLogic();
+    playerSelection = "ROCK";
+    hasPlayed = true;
     playRound();
-    //Stop the game if the player presses Cancel
-    if (playerSelection === null) {
-      break;
+  });
+  const paperButton = document.querySelector("#paper");
+  paperButton.addEventListener("click", function paperEvent(e) {
+    console.log("Paper Event Listener Added");
+    if (finishedPlay === true) {
+      return;
     }
-    //Stop the game once 5 rounds are played
-    if (playCount == 5) {
-      break;
+    finishRoundLogic();
+    playerSelection = "PAPER";
+    hasPlayed = true;
+    playRound();
+  });
+  const scissorsButton = document.querySelector("#scissors");
+  scissorsButton.addEventListener("click", function scissorEvent(e) {
+    console.log("Scissor Event Listener Added");
+    if (finishedPlay === true) {
+      return;
     }
-  }
-  if (winCounter > loseCounter) {
-    return `You Won! Final score was: ${winCounter} | ${loseCounter}`;
-  } else if (loseCounter > winCounter) {
-    return `You Lost! Final score was: ${winCounter} | ${loseCounter}`;
-  } else {
-    return `Draw Game!`;
-  }
+    finishRoundLogic();
+    playerSelection = "SCISSORS";
+    hasPlayed = true;
+    playRound();
+  });
 }
+
+function startGame() {
+  const startBtn = document.querySelector("#startGame");
+  startBtn.addEventListener("click", startGameLogic);
+  eventListenerAdded = true;
+}
+
+function startGameLogic() {
+  const result = document.querySelector("#results");
+  const notice = document.createElement("p");
+  const startButton = document.querySelector("#startGame");
+  notice.setAttribute("id", "notice");
+  notice.textContent = `Pick an option to begin play`;
+  result.style.backgroundColor = "pink";
+  result.appendChild(notice);
+  startButton.disabled = true;
+  //Start game button is disabled once game begins
+  resetStart();
+  //Begin Game
+  finishedPlay = false;
+  awaitPlay();
+}
+
+function resetStart() {
+  //Prevents duplication of click event handlers
+  const startBtn = document.querySelector("#startGame");
+  startBtn.removeEventListener("click", startGameLogic);
+}
+
+function resetGame() {
+  //Prevents duplication of click event handlers
+  const rockButton = document.querySelector("#rock");
+  rockButton.removeEventListener("click", function rockEvent(e) {
+    if (finishedPlay === true) {
+      return;
+    }
+    finishRoundLogic();
+    playerSelection = "ROCK";
+    hasPlayed = true;
+    playRound();
+  });
+  const paperButton = document.querySelector("#paper");
+  paperButton.removeEventListener("click", function paperEvent(e) {
+    if (finishedPlay === true) {
+      return;
+    }
+    finishRoundLogic();
+    playerSelection = "PAPER";
+    hasPlayed = true;
+    playRound();
+  });
+  const scissorsButton = document.querySelector("#scissors");
+  scissorsButton.removeEventListener("click", function scissorEvent(e) {
+    if (finishedPlay === true) {
+      return;
+    }
+    finishRoundLogic();
+    playerSelection = "SCISSORS";
+    hasPlayed = true;
+    playRound();
+  });
+}
+
+startGame();

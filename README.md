@@ -1,3 +1,3 @@
 # Rock Paper Scissors
 
-Back End Rock Paper Scissors game
+Rock Paper Scissors game
