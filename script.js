@@ -8,7 +8,7 @@ function createGrid() {
   if (gridSize > 100) {
     gridSize = 16;
     alert(
-      'The side length picked cannot be larger than 100. To prevent the page slowing down, please pick a number below 100.'
+      'The provided size is too large. To prevent the page slowing down, please pick a number below 100.'
     );
   }
   const gridDiv = document.querySelector('#grid');
