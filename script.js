@@ -1,5 +1,7 @@
 /* Written by Samuel Mereau, 2020 */
 
+/* TODO: Include message for plays per round */
+
 let output;
 
 let playerSelection;
