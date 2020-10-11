@@ -42,7 +42,7 @@ function draw() {
 }
 
 //computerPlay will create a random selection for all plays each time it is called
-let computerPlay = () => {
+let computerPlay() {
   let random = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
   switch (random) {
     case 1:
