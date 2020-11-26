@@ -4,25 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"/>
     <script src="script.js"></script>
 </head>
 <body>
-   <div class="buttons">
-        <div class="options">
-            <button id="clear">Clear</button>
-        </div>
+    <div class="display">
+        <p id="text">Test</p>
+    </div>
+  <div id="calculator">
+    <div class="buttons">
+        <div class="calculator-buttons">
         <div class="number-buttons">
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
+            <!-- Row 1 -->
+            <button id="clear">C</button>
+            <!-- Row 2 -->
             <button id="seven">7</button>
             <button id="eight">8</button>
             <button id="nine">9</button>
+            <!-- Row 3 -->
+            <button id="four">4</button>
+            <button id="five">5</button>
+            <button id="six">6</button>
+            <!-- Row 4 -->
+            <button id="one">1</button>
+            <button id="two">2</button>
+            <button id="three">3</button>
+            <!-- Row 5 -->
             <button id="zero">0</button>
+            <button id="decimal">.</button>
         </div>
         <div class="operator-buttons">
             <button id="divide">/</button>
@@ -31,9 +40,8 @@
             <button id="plus">+</button>
             <button id="equal">=</button>
         </div>
-   </div>
-   <div class="display">
-       <p id="text"></p>
-   </div>
+        </div>  
+    </div>
+</div>
 </body>
 </html>
