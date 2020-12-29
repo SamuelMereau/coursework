@@ -5,33 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css"/>
-    <script src="script.js"></script>
 </head>
 <body>
-    <div class="display">
-        <p id="text">Test</p>
-    </div>
   <div id="calculator">
+    <div class="display">
+        <p id="result">0</p>
+    </div>
     <div class="buttons">
         <div class="calculator-buttons">
         <div class="number-buttons">
             <!-- Row 1 -->
+            <button id="backspace">⌫</button>
             <button id="clear">C</button>
             <!-- Row 2 -->
-            <button id="seven">7</button>
-            <button id="eight">8</button>
-            <button id="nine">9</button>
+            <button class="number-button" id="seven">7</button>
+            <button class="number-button" id="eight">8</button>
+            <button class="number-button" id="nine">9</button>
             <!-- Row 3 -->
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
+            <button class="number-button" id="four">4</button>
+            <button class="number-button" id="five">5</button>
+            <button class="number-button" id="six">6</button>
             <!-- Row 4 -->
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
+            <button class="number-button" id="one">1</button>
+            <button class="number-button" id="two">2</button>
+            <button class="number-button" id="three">3</button>
             <!-- Row 5 -->
-            <button id="zero">0</button>
-            <button id="decimal">.</button>
+            <button class="number-button" id="zero">0</button>
+            <button class="number-button" id="decimal">.</button>
         </div>
         <div class="operator-buttons">
             <button id="divide">/</button>
@@ -43,5 +43,6 @@
         </div>  
     </div>
 </div>
+    <script src="script.js"></script>
 </body>
 </html>
