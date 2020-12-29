@@ -58,7 +58,6 @@ function operate(givenEquation) {
   }
 }
 
-/* TODO */
 function operateFromOperator(operator) {
   console.log('operate function entered');
   function pushNumber() {
@@ -97,6 +96,7 @@ for (let i = 0; i < button.length; i++) {
     buttonPress(e.target);
     console.log('typedNumber: ', typedNumber);
     console.log('parsed equation: ', parsedEquation);
+    console.log('persistent answer: ', persistentAnswer);
   });
 }
 
@@ -115,6 +115,7 @@ function buttonPress(buttonObj) {
     case 'clear':
       typedNumber = ['0'];
       parsedEquation = [];
+      persistentAnswer = undefined;
       break;
     //Math Operators
     case 'divide':
