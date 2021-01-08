@@ -1,3 +1,1 @@
-# Rock Paper Scissors
-
-Rock Paper Scissors game
+https://sammc-rock-paper-scissors.netlify.app/
