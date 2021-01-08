@@ -1,8 +1,8 @@
 # The Odin Project Coursework
 
----
+--
 **View previews for all branches: https://samuelmereau.github.io/coursework/**
----
+--
 
 This is a portfolio of all my completed coursework projects given by The Odin Project.
 
