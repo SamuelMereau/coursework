@@ -35,6 +35,26 @@ body {
 .bookItem h2 {
   color: #363636;
   margin-bottom: 0;
+  margin-top: 20;
+}
+
+.read {
+  border: none;
+  background-color: #cdcdcd;
+  font-family: 'Roboto', Helvetica, sans-serif;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  outline-width: 0.5px;
+}
+
+.hasRead {
+  font-size: 40px;
+  font-weight: bolder;
+  order: -1;
+  margin-top: -60px;
+  color: transparent;
+  text-shadow: 0 0 0 green;
 }
 
 .author {
@@ -52,9 +72,9 @@ body {
   color: #363636;
 }
 
-.bookItem .deleteBook {
+.deleteBook {
   position: absolute;
-  margin-top: 300px;
+  margin-top: 290px;
   background: none;
   border: none;
   outline: none;
@@ -79,6 +99,7 @@ body {
   width: 100%;
   font-size: 100px;
   color: #b7b7b791;
+  background-color: #efefef;
   transition: 0.3s ease-out;
   outline: none;
 }

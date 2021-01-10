@@ -105,11 +105,11 @@ function displayBooks() {
   const books = document.querySelector('.books');
   function generateBookTile(index, slice) {
     const div = document.createElement('div');
-    const h2 = document.createElement('h2');
     books.appendChild(div);
-    div.appendChild(h2);
     div.classList.add(`bookItem`);
     div.id = `bookItem-${myLibrary.length}`;
+    const h2 = document.createElement('h2');
+    div.appendChild(h2);
     h2.textContent = myLibrary[index - slice].title;
     const authorText = document.createElement('p');
     div.appendChild(authorText);
@@ -118,7 +118,73 @@ function displayBooks() {
     const readButton = document.createElement('button');
     div.appendChild(readButton);
     readButton.classList.add('read');
+    readButton.id = `read-${myLibrary.length - 1}`;
     readButton.textContent = 'Read';
+    readButton.addEventListener('click', function () {
+      const index = Number(readButton.id.slice(5));
+      if (myLibrary[index].read === true) {
+        function fadeOut() {
+          const readIndicator = document.querySelector(`#hasRead-${index + 1}`);
+          console.log(readIndicator);
+          let opacity = 100;
+          let padding = 20;
+          let pushTimer = setInterval(pushUp, 5);
+          let fadeTimer = setInterval(fade, 1);
+          function fade() {
+            if (opacity == 0) {
+              clearInterval(fadeTimer);
+              readIndicator.remove();
+            } else {
+              opacity--;
+              readIndicator.style.opacity = opacity + '%';
+            }
+          }
+          function pushUp() {
+            if (padding == 7) {
+              clearInterval(pushTimer);
+            } else {
+              padding--;
+              readIndicator.style.paddingBottom = padding + 'px';
+            }
+          }
+        }
+        readButton.textContent = 'Read';
+        fadeOut();
+        myLibrary[index].read = false;
+        return;
+      }
+      myLibrary[index].read = true;
+      readButton.textContent = 'Unread';
+      const hasReadIndicator = document.createElement('span');
+      hasReadIndicator.classList.add('hasRead');
+      hasReadIndicator.id = `hasRead-${myLibrary.length}`;
+      hasReadIndicator.textContent = '✓';
+      hasReadIndicator.style.opacity = '0';
+      div.appendChild(hasReadIndicator);
+      function fadeIn() {
+        let opacity = 0;
+        let padding = 0;
+        let pushTimer = setInterval(pushDown, 5);
+        let fadeTimer = setInterval(fade, 1);
+        function fade() {
+          if (opacity == 100) {
+            clearInterval(fadeTimer);
+          } else {
+            opacity++;
+            hasReadIndicator.style.opacity = opacity + '%';
+          }
+        }
+        function pushDown() {
+          if (padding == 20) {
+            clearInterval(pushTimer);
+          } else {
+            padding++;
+            hasReadIndicator.style.paddingBottom = padding + 'px';
+          }
+        }
+      }
+      fadeIn();
+    });
     const pagesText = document.createElement('p');
     div.appendChild(pagesText);
     pagesText.textContent = `${myLibrary[index - slice].pages} pages`;
@@ -156,3 +222,5 @@ function displayBooks() {
 }
 
 displayBooks();
+
+function identifyBookRead() {}
