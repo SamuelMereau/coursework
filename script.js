@@ -1,4 +1,5 @@
 let myLibrary = [];
+let canUseStorage = true;
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -10,28 +11,31 @@ function Book(title, author, pages, read) {
 function addBookToLibrary() {
   createForm();
   const submitNewBook = document.querySelector('#submit');
-  function pushBook() {
+  function pushCreatedBook() {
     const bookName = document.querySelector('#bookName');
     const author = document.querySelector('#author');
     const pages = document.querySelector('#pages');
     if (bookName.value == '') {
-      bookName.value = 'No Name';
+      bookName.value = `No Name ${myLibrary.length + 1}`;
     }
     if (author.value == '') {
-      author.value = 'No Author';
+      author.value = `No Author`;
     }
     if (pages.value == '') {
-      pages.value = 'No';
+      pages.value = `No`;
     }
     const addBook = new Book(bookName.value, author.value, pages.value, false);
     myLibrary.push(addBook);
+    if (canUseStorage) {
+      localStorage.setItem(`Book-${myLibrary.length - 1}`, JSON.stringify(addBook));
+    }
     const newBook = document.querySelector('#newBook');
     newBook.removeEventListener('click', addBookToLibrary);
     const addToLib = document.querySelector('#add');
     addToLib.outerHTML = '';
     displayBooks();
   }
-  submitNewBook.addEventListener('click', pushBook, {
+  submitNewBook.addEventListener('click', pushCreatedBook, {
     once: true,
   });
 }
@@ -103,11 +107,41 @@ function createForm() {
 
 function displayBooks() {
   const books = document.querySelector('.books');
-  function generateBookTile(index, slice) {
+  if (canUseStorage) {
+    for (var i = 0; i < myLibrary.length; i++) {
+      if (document.getElementById(`bookItem-${i}`)) {
+        continue;
+      }
+      switch (myLibrary.length) {
+        case 0:
+          break;
+        case 1:
+          generateBookTile(0, 0, i);
+          break;
+        default:
+          generateBookTile(i + 1, 1, i);
+          break;
+      }
+    }
+    const addToLibrary = document.createElement('div');
+    const newBookButton = document.createElement('button');
+    books.appendChild(addToLibrary);
+    addToLibrary.appendChild(newBookButton);
+    addToLibrary.id = 'add';
+    newBookButton.id = 'newBook';
+    newBookButton.textContent = '+';
+    newBookButton.addEventListener('click', addBookToLibrary);
+    return;
+  }
+  function generateBookTile(index, slice, iteration) {
     const div = document.createElement('div');
     books.appendChild(div);
     div.classList.add(`bookItem`);
-    div.id = `bookItem-${myLibrary.length}`;
+    if (canUseStorage) {
+      div.id = `bookItem-${iteration}`;
+    } else {
+      div.id = `bookItem-${myLibrary.length}`;
+    }
     const h2 = document.createElement('h2');
     div.appendChild(h2);
     h2.textContent = myLibrary[index - slice].title;
@@ -118,14 +152,18 @@ function displayBooks() {
     const readButton = document.createElement('button');
     div.appendChild(readButton);
     readButton.classList.add('read');
-    readButton.id = `read-${myLibrary.length - 1}`;
+    if (canUseStorage) {
+      readButton.id = `read-${iteration}`;
+    } else {
+      readButton.id = `read-${myLibrary.length - 1}`;
+    }
     readButton.textContent = 'Read';
-    readButton.addEventListener('click', function () {
-      const index = Number(readButton.id.slice(5));
-      if (myLibrary[index].read === true) {
+    readButton.addEventListener('click', function (e) {
+      const index = Number(e.toElement.id.slice(5));
+      const bookObject = localStorage.getItem(`Book-${index}`);
+      if (myLibrary[index].read == true || JSON.parse(bookObject).read == true) {
         function fadeOut() {
-          const readIndicator = document.querySelector(`#hasRead-${index + 1}`);
-          console.log(readIndicator);
+          const readIndicator = document.querySelector(`#hasRead-${index}`);
           let opacity = 100;
           let padding = 20;
           let pushTimer = setInterval(pushUp, 5);
@@ -151,13 +189,23 @@ function displayBooks() {
         readButton.textContent = 'Read';
         fadeOut();
         myLibrary[index].read = false;
+        if (canUseStorage) {
+          const bookObject = JSON.parse(localStorage.getItem(`Book-${index}`));
+          bookObject.read = false;
+          localStorage.setItem(`Book-${index}`, JSON.stringify(bookObject));
+        }
         return;
       }
       myLibrary[index].read = true;
+      if (canUseStorage) {
+        const bookObject = JSON.parse(localStorage.getItem(`Book-${index}`));
+        bookObject.read = true;
+        localStorage.setItem(`Book-${index}`, JSON.stringify(bookObject));
+      }
       readButton.textContent = 'Unread';
       const hasReadIndicator = document.createElement('span');
       hasReadIndicator.classList.add('hasRead');
-      hasReadIndicator.id = `hasRead-${myLibrary.length}`;
+      hasReadIndicator.id = `hasRead-${index}`;
       hasReadIndicator.textContent = '✓';
       hasReadIndicator.style.opacity = '0';
       div.appendChild(hasReadIndicator);
@@ -193,12 +241,23 @@ function displayBooks() {
     div.appendChild(deleteButton);
     deleteButton.classList.add('deleteBook');
     deleteButton.textContent = 'X';
-    deleteButton.id = `delete-${myLibrary.length}`;
+    if (canUseStorage) {
+      deleteButton.id = `delete-${iteration}`;
+    } else {
+      deleteButton.id = `delete-${myLibrary.length}`;
+    }
     deleteButton.addEventListener('click', function () {
       const index = deleteButton.id.slice(7);
-      myLibrary.splice(myLibrary.indexOf(index), 1);
-      const bookTile = document.querySelector(`#bookItem-${index}`);
-      bookTile.remove();
+      if (canUseStorage) {
+        myLibrary.splice(myLibrary.indexOf(iteration), 1);
+        const bookTile = document.querySelector(`#bookItem-${iteration}`);
+        bookTile.remove();
+        localStorage.removeItem(`Book-${iteration}`);
+      } else {
+        myLibrary.splice(myLibrary.indexOf(index), 1);
+        const bookTile = document.querySelector(`#bookItem-${index}`);
+        bookTile.remove();
+      }
     });
   }
   switch (myLibrary.length) {
@@ -208,7 +267,7 @@ function displayBooks() {
       generateBookTile(0, 0);
       break;
     default:
-      generateBookTile(myLibrary.length, 1);
+      generateBookTile(i + 1, 1);
       break;
   }
   const addToLibrary = document.createElement('div');
@@ -221,4 +280,63 @@ function displayBooks() {
   newBookButton.addEventListener('click', addBookToLibrary);
 }
 
-displayBooks();
+function storageAvailable(type) {
+  var storage;
+  try {
+    storage = window[type];
+    var x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      (e.code === 22 ||
+        e.code === 1014 ||
+        e.name === 'QuotaExceededError' ||
+        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+(function pushBooks() {
+  if (storageAvailable('localStorage')) {
+    canUseStorage = true;
+    if (localStorage.length) {
+      if (localStorage.length > 1) {
+        for (let i = 0; i < localStorage.length; i++) {
+          let bookId = localStorage.key(i);
+          console.log(bookId);
+          const bookObject = JSON.parse(localStorage.getItem(`${bookId}`));
+          console.log(bookObject);
+          const addBook = new Book(
+            bookObject.title,
+            bookObject.author,
+            bookObject.pages,
+            bookObject.read
+          );
+          myLibrary.push(addBook);
+        }
+      } else {
+        const bookId = localStorage.key(0);
+        const bookObject = JSON.parse(localStorage.getItem(`Book-${bookId.slice(5)}`));
+        const addBook = new Book(
+          bookObject.title,
+          bookObject.author,
+          bookObject.pages,
+          bookObject.read
+        );
+        myLibrary.push(addBook);
+      }
+    }
+    displayBooks();
+  } else {
+    canUseStorage = false;
+    alert(
+      'This project has local storage functionalities, however your browser does not support this. Books will be removed when the page refreshes.'
+    );
+    displayBooks();
+  }
+})();
