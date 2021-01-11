@@ -45,7 +45,7 @@ body {
   width: 60px;
   height: 30px;
   border-radius: 5px;
-  outline-width: 0.5px;
+  outline: none;
 }
 
 .hasRead {
