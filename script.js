@@ -108,7 +108,7 @@ function createForm() {
 function displayBooks() {
   const books = document.querySelector('.books');
   if (canUseStorage) {
-    for (var i = 0; i < myLibrary.length; i++) {
+    for (let i = 0; i < myLibrary.length; i++) {
       if (document.getElementById(`bookItem-${i}`)) {
         continue;
       }
