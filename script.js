@@ -222,5 +222,3 @@ function displayBooks() {
 }
 
 displayBooks();
-
-function identifyBookRead() {}
