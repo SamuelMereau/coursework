@@ -250,9 +250,15 @@ function displayBooks() {
       const index = deleteButton.id.slice(7);
       if (canUseStorage) {
         myLibrary.splice(myLibrary.indexOf(iteration), 1);
+        console.log(iteration);
         const bookTile = document.querySelector(`#bookItem-${iteration}`);
         bookTile.remove();
-        localStorage.removeItem(`Book-${iteration}`);
+        if (localStorage.length > 1) {
+          localStorage.removeItem(`Book-${iteration}`);
+        } else {
+          const bookId = localStorage.key(0);
+          localStorage.removeItem(bookId);
+        }
       } else {
         myLibrary.splice(myLibrary.indexOf(index), 1);
         const bookTile = document.querySelector(`#bookItem-${index}`);
@@ -321,7 +327,9 @@ function storageAvailable(type) {
         }
       } else {
         const bookId = localStorage.key(0);
+        console.log(bookId);
         const bookObject = JSON.parse(localStorage.getItem(`Book-${bookId.slice(5)}`));
+        console.log(bookObject);
         const addBook = new Book(
           bookObject.title,
           bookObject.author,
