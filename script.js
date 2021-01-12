@@ -160,8 +160,7 @@ function displayBooks() {
     readButton.textContent = 'Read';
     readButton.addEventListener('click', function (e) {
       const index = Number(e.toElement.id.slice(5));
-      const bookObject = localStorage.getItem(`Book-${index}`);
-      if (myLibrary[index].read == true || JSON.parse(bookObject).read == true) {
+      if (myLibrary[index].read == true) {
         function fadeOut() {
           const readIndicator = document.querySelector(`#hasRead-${index}`);
           let opacity = 100;
@@ -199,6 +198,7 @@ function displayBooks() {
       myLibrary[index].read = true;
       if (canUseStorage) {
         const bookObject = JSON.parse(localStorage.getItem(`Book-${index}`));
+        console.log(index);
         bookObject.read = true;
         localStorage.setItem(`Book-${index}`, JSON.stringify(bookObject));
       }
@@ -250,7 +250,6 @@ function displayBooks() {
       const index = deleteButton.id.slice(7);
       if (canUseStorage) {
         myLibrary.splice(myLibrary.indexOf(iteration), 1);
-        console.log(iteration);
         const bookTile = document.querySelector(`#bookItem-${iteration}`);
         bookTile.remove();
         if (localStorage.length > 1) {
@@ -314,9 +313,7 @@ function storageAvailable(type) {
       if (localStorage.length > 1) {
         for (let i = 0; i < localStorage.length; i++) {
           let bookId = localStorage.key(i);
-          console.log(bookId);
           const bookObject = JSON.parse(localStorage.getItem(`${bookId}`));
-          console.log(bookObject);
           const addBook = new Book(
             bookObject.title,
             bookObject.author,
@@ -340,6 +337,23 @@ function storageAvailable(type) {
       }
     }
     displayBooks();
+    for (let i = 0; i < localStorage.length; i++) {
+      let bookId = localStorage.key(i);
+      const bookObject = JSON.parse(localStorage.getItem(`${bookId}`));
+      if (bookObject.read == true) {
+        console.log('index', i);
+        const hasReadIndicator = document.createElement('span');
+        hasReadIndicator.classList.add('hasRead');
+        hasReadIndicator.id = `hasRead-${i}`;
+        //console.log('index', index);
+        hasReadIndicator.textContent = '✓';
+        hasReadIndicator.style.paddingBottom = '20px';
+        const div = document.querySelector(`#bookItem-${i}`);
+        div.appendChild(hasReadIndicator);
+        const readButton = document.querySelector(`#read-${i}`);
+        readButton.textContent = 'Unread';
+      }
+    }
   } else {
     canUseStorage = false;
     alert(
