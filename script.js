@@ -341,7 +341,6 @@ function storageAvailable(type) {
       let bookId = localStorage.key(i);
       const bookObject = JSON.parse(localStorage.getItem(`${bookId}`));
       if (bookObject.read == true) {
-        console.log('index', i);
         const hasReadIndicator = document.createElement('span');
         hasReadIndicator.classList.add('hasRead');
         hasReadIndicator.id = `hasRead-${i}`;
