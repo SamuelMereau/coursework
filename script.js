@@ -286,10 +286,10 @@ function displayBooks() {
 }
 
 function storageAvailable(type) {
-  var storage;
+  let storage;
   try {
     storage = window[type];
-    var x = '__storage_test__';
+    let x = '__storage_test__';
     storage.setItem(x, x);
     storage.removeItem(x);
     return true;
@@ -345,7 +345,6 @@ function storageAvailable(type) {
         const hasReadIndicator = document.createElement('span');
         hasReadIndicator.classList.add('hasRead');
         hasReadIndicator.id = `hasRead-${i}`;
-        //console.log('index', index);
         hasReadIndicator.textContent = '✓';
         hasReadIndicator.style.paddingBottom = '20px';
         const div = document.querySelector(`#bookItem-${i}`);
