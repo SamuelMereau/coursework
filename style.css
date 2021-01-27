@@ -1,0 +1,66 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.board {
+  display: grid;
+  grid-template-rows: repeat(3, 150px);
+  grid-template-columns: repeat(3, 150px);
+  outline: 10px solid white;
+  outline-offset: -5px;
+  width: 455px;
+  height: 455px;
+}
+
+.boardSquare {
+  width: 150px;
+  height: 150px;
+  border: 3px solid black;
+  text-align: center;
+}
+
+.hoverIndicator {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(128, 128, 128, 0.5);
+  margin: 35%;
+  border-radius: 50%;
+  border: none;
+}
+
+.card svg {
+  margin: auto;
+  padding-top: 14px;
+}
+
+.turnIndicator {
+  background-color: rgba(128, 128, 128, 0.2);
+  margin-left: 150px;
+  padding: 50px;
+  border-radius: 25px;
+}
+
+.turnIndicator p {
+  font-size: 32px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#player1 {
+  color: #345f82;
+  font-weight: bold;
+}
+
+#player2 {
+  color: #aa555a;
+}
