@@ -82,6 +82,15 @@
       ];
       let squaresContainingCross = [];
       let squaresContainingNought = [];
+      function checkBoard(target) {
+        for (let i = 0; i <= 7; i++) {
+          if (winningCombos[i].every((v) => target.includes(v))) {
+            return true;
+          } else {
+            continue;
+          }
+        }
+      }
       for (let i = 1; i <= 9; i++) {
         const square = document.querySelector(`#square${i}`);
         if (square.hasChildNodes()) {
@@ -98,15 +107,6 @@
                 endGame.noughtWin();
               }
               break;
-          }
-          function checkBoard(target) {
-            for (let i = 0; i <= 7; i++) {
-              if (winningCombos[i].every((v) => target.includes(v))) {
-                return true;
-              } else {
-                continue;
-              }
-            }
           }
         }
       }
