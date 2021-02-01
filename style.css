@@ -78,6 +78,7 @@ p {
   height: 35px;
   border: 1px solid grey;
   opacity: 0.75;
+  border-color: #5f636848;
   border-radius: 20px;
   border-width: 1px;
   margin-bottom: 30px;
