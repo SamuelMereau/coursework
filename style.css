@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 html,
 body {
   padding: 0;
@@ -14,6 +16,10 @@ body {
 }
 
 .board {
+  position: relative;
+}
+
+.boardGrid {
   display: grid;
   grid-template-rows: repeat(3, 150px);
   grid-template-columns: repeat(3, 150px);
@@ -54,13 +60,42 @@ body {
 .turnIndicator p {
   font-size: 32px;
   font-family: Arial, Helvetica, sans-serif;
+  align-items: center;
+  text-align: center;
 }
 
 #player1 {
   color: #345f82;
   font-weight: bold;
+  text-align: center;
 }
 
 #player2 {
   color: #aa555a;
+}
+
+#lockScreen {
+  position: absolute;
+  width: 455px;
+  height: 455px;
+  background-color: grey;
+  opacity: 90%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#gameSummary {
+  font-family: 'Roboto', Helvetica, sans-serif;
+  opacity: 100%;
+  font-size: 40px;
+  padding-top: 32%;
+}
+
+#crown svg {
+  position: relative;
+  float: left;
+  width: 22px;
+  height: 22px;
+  transform: translateY(5px);
+  padding-right: 10px;
 }
