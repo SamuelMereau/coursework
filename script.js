@@ -1,7 +1,6 @@
 (function GameBoard() {
   const game = gameProgress();
   function EventListener() {
-    const board = document.querySelector('.board');
     for (let i = 1; i <= 9; i++) {
       const boardChild = document.querySelector(`#square${i}`);
       boardChild.addEventListener('mouseenter', function () {
