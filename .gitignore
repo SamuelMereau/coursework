@@ -1,0 +1,3 @@
+# Don't push these files/folder to the branch
+
+node_modules/
