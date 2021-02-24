@@ -1,15 +1,20 @@
-html, body {
-    padding: 0;
-    margin: 0;
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: rgb(19, 19, 19);
 }
 
 header {
-    background-color: rgb(230, 230, 230);
-    padding-bottom: 20px;
-    margin: auto;
+  background-color: #a58961;
+  padding-bottom: 20px;
+  margin: auto;
 }
 
 #header-content {
-    margin: auto;
-    background-color: rgb(212, 212, 212);
+  margin: auto;
+  background-color: #242429;
 }
