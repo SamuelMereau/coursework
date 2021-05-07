@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
 
 html,
 body {
@@ -8,12 +9,18 @@ body {
 
 body {
   background-color: rgb(19, 19, 19);
+  height: 100vh;
 }
 
 header {
   background-color: #a58961;
   padding-bottom: 20px;
   margin: auto;
+}
+
+a {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  text-decoration: none;
 }
 
 #header-content {
@@ -25,38 +32,114 @@ header {
 }
 
 #logo {
-  padding-left: 20px;
+  padding-left: 30px;
 }
 
 nav {
-  padding-right: 20px;
+  padding-right: 30px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   width: 100%;
+  align-items: center;
 }
 
 .navbar-item {
   font-size: 15px;
-  text-decoration: none;
   color: white;
-  margin-right: 30px;
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  margin-right: 50px;
   transition: color 0.2s;
+}
+
+#call-to-action {
+  background-color: #585858a1;
+  border-radius: 5px;
+  padding: 15px 25px;
+  transition: background-color 0.2s, color;
+}
+
+#call-to-action:hover {
+  color: white;
+  background-color: #58585867;
 }
 
 .navbar-item:hover {
   color: rgb(180, 180, 180);
 }
 
+#content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+#background {
+  z-index: -1;
+  opacity: 0.25;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+}
+
+.heading {
+  top: 25%;
+  position: relative;
+  opacity: 1;
+  font-size: 24px;
+  color: white;
+  font-family: 'Merriweather', 'Times New Roman', Times, serif;
+  height: 500px;
+}
+
+.heading h1 {
+  font-size: 64px;
+}
+
+#book-now {
+  position: relative;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: white;
+  background-color: #6d6d6dd5;
+  padding: 15px 100px;
+  margin-top: 5px;
+  border-radius: 10px;
+  transition: background-color 0.2s, padding 0.5s;
+}
+
+#book-now:hover {
+  background-color: #6d6d6d;
+  padding: 15px 125px;
+}
+
 footer {
   background-color: #242429;
-  height: 100px; 
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 13px;
 }
 
 #madeby {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
   color: white;
-  padding-top: 35px;
-  padding-left: 20px;
+  padding-left: 30px;
+  margin-right: 100px;
+}
+
+.sitemap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 450px;
+}
+
+.sitemap-item {
+  color: white;
+  text-decoration: none;
 }
