@@ -22,10 +22,6 @@ const tictactoe = document.querySelector('#tictactoe');
 tictactoe.addEventListener('click', function () {
   window.location.href = 'https://sammc-tic-tac-toe.netlify.app/';
 });
-const restaurant = document.querySelector('#restaurant');
-restaurant.addEventListener('click', function () {
-  window.location.href = 'https://sammc-restaurant.netlify.app/';
-});
 
 const profileImg = document.querySelector('#profile-img');
 function createBubble() {
