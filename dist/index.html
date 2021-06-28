@@ -9,26 +9,57 @@
 </head>
     <body>
         <header>
-            <button id="menu-button">Menu</button>
-            <nav>
+            <div id="menu-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <line x1="4" y1="6" x2="20" y2="6" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <line x1="4" y1="18" x2="20" y2="18" />
+                </svg>
+            </div>
+            <div id="active-project">
+                <p id="project-name">Project Name</p>
+            </div>
+            <div id="app-name">
                 <a href="https://github.com/samuelmereau" target="_blank"><img id="icon" src="img/icon.png" alt="Icon"></a>
                 <h1>To-Do List</h1>
-            </nav>
+            </div>
         </header>
         <aside id="projects">
-            <ol id="project-list">
-                <li class="project-test">Project 1</li>
-                <li class="project-test">Project 2</li>
-                <li class="project-test">Project 3</li>
-            </ol>
+            <div id="project-window-content">
+                <div id="close-menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </div>
+                <ol id="project-list">
+                    <li class="project-item">Project 1</li>
+                    <li class="project-item">Project 2</li>
+                    <li class="project-item">Project 3</li>
+                </ol>
+            </div>
         </aside>
         <main id="project-view">
-            <div id="active-checklist">
-                <ol id="item-list">
+            <div id="checklist1" class="active-checklist">
+                <div id="checklist1-colour" class="checklist-colour"></div>
+                <h2 id="checklist1-title" class="checklist-title">Checklist Title</h2>
+                <ol id="checklist1-item-list" class="item-list">
                     <li class="item-test">Item 1</li>
                     <li class="item-test">Item 2</li>
                     <li class="item-test">Item 3</li>
                 </ol>
+            </div>
+            <div id="add-checklist">
+                <div id="add-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-plus" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <rect x="4" y="4" width="16" height="16" rx="2" />
+                        <line x1="9" y1="12" x2="15" y2="12" />
+                        <line x1="12" y1="9" x2="12" y2="15" />
+                    </svg>
+                </div>
             </div>
         </main>
         <footer>
