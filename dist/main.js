@@ -1,0 +1,1 @@
+(()=>{const e=document.querySelector("#menu-button"),t=document.querySelector("#projects");e.addEventListener("click",(function(){t.classList.toggle("clicked")}))})();
