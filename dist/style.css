@@ -51,10 +51,11 @@ header, #app-name, #active-project{
 
 #project-name {
   width: 100%;
-  text-align: center;
+  text-align: center
 }
 
 #app-name {
+  flex-basis: 210px;
 	justify-content: flex-end;
 	height: 100%;
   font-size: 13px;
@@ -104,6 +105,15 @@ header, #app-name, #active-project{
   }
 }
 
+#close-menu {
+  display: flex;
+}
+
+#project-menu-title {
+  flex-grow: 1;
+  text-align: center;
+}
+
 #project-window-content {
   padding: 40px;
 }
@@ -131,6 +141,18 @@ header, #app-name, #active-project{
 .project-item:hover {
   top: 10px;
   background-color: rgba(128, 128, 128, 0.1)
+}
+
+#new-project {
+  margin-top: 20px;
+  border: dashed 3px #a3a3a3;
+  border-radius: 5px;
+  height: 50px;
+}
+#new-project svg {
+  display: block;
+  margin: auto;
+  margin-top: 3px;
 }
 
 #project-view {
@@ -184,6 +206,7 @@ header, #app-name, #active-project{
   height: 100%;
   display: flex;
   align-items: center;
+  transition: opacity 0.3s;
 }
 
 #add-icon svg {
