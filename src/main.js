@@ -1,26 +1,8 @@
+//old code, pls copy new from dist
+
 const menuButton = document.querySelector('#menu-button');
-const closeMenuButton = document.querySelector('#close-menu')
-
-function toggleClicked() {
-    const projects = document.querySelector('#projects');
-    projects.classList.toggle('clicked');
-}
-
-function toggleClickedOutside() {
-    toggleClicked();
-    const backdrop = document.querySelector('#backdrop');
-    backdrop.remove();
-}
-
+const projects = document.querySelector('#projects');
 menuButton.addEventListener('click', function () {
-    toggleClicked()
-    const div = document.createElement('div');
-    div.id = 'backdrop';
-    div.onclick = toggleClickedOutside;
-    document.body.appendChild(div);
+    projects.classList.toggle('clicked');
 })
-closeMenuButton.addEventListener('click', function () {
-    toggleClicked()
-    const backdrop = document.querySelector('#backdrop');
-    backdrop.remove();
-})
+
