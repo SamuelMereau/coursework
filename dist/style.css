@@ -38,6 +38,7 @@ header {
 	height: 100px;
 	padding-left: 30px;
 	padding-right: 50px;
+  margin-bottom: 30px;
 }
 
 header, #app-name, #active-project{
@@ -140,7 +141,8 @@ header, #app-name, #active-project{
 
 .project-item:hover {
   top: 10px;
-  background-color: rgba(128, 128, 128, 0.1)
+  background-color: rgba(128, 128, 128, 0.1);
+  cursor: pointer;
 }
 
 #new-project {
@@ -157,8 +159,10 @@ header, #app-name, #active-project{
 
 #project-view {
   display: flex;
+  align-content: flex-start;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .checklist-title {
@@ -174,8 +178,8 @@ header, #app-name, #active-project{
 .active-checklist {
   background-color: white;
   width: 500px;
-  height: auto;
-  margin: 50px;
+  height: min-content;
+  margin: 25px;
   border-radius: 20px;
   padding-bottom: 10px;
 }
@@ -188,12 +192,20 @@ header, #app-name, #active-project{
   border-top-right-radius: 20px;
 }
 
+.item-list {
+  padding-left: 20px;
+}
+
+.checklist-item {
+  list-style-type: none;
+}
+
 #add-checklist {
   height: 449px;
-  width: 450px;
+  width: 500px;
   border: dashed 20px #2c3e5065;
   border-radius: 20px;
-  margin: 50px;
+  margin: 25px;
 }
 
 #add-icon:hover {
