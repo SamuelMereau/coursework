@@ -201,20 +201,20 @@ header, #app-name, #active-project{
 }
 
 #add-checklist {
-  height: 449px;
+  height: 190px;
   width: 500px;
-  border: dashed 20px #2c3e5065;
+  border: dashed 20px rgba(255, 255, 255, 0.25);
   border-radius: 20px;
   margin: 25px;
 }
 
 #add-icon:hover {
-  opacity: 1;
+  opacity: 0.75;
   cursor: pointer;
 }
 
 #add-icon {
-  opacity: 0.5;
+  opacity: 0.25;
   height: 100%;
   display: flex;
   align-items: center;
@@ -226,6 +226,7 @@ header, #app-name, #active-project{
   margin: 0 auto;
   width: 133px;
   height: 133px;
+  stroke: rgba(255, 255, 255);
 }
 
 footer {
